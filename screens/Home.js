@@ -7,13 +7,14 @@ import {
     FlatList,
     TouchableOpacity,
     Image,
-    ImageBackground
+    ImageBackground,
+    LogBox
 
 } from 'react-native';
 
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from "../constants"
 
-import { PriceAlert } from "../components";
+import { PriceAlert, TransactionHistory } from "../components";
 
 
 
@@ -21,6 +22,19 @@ const Home = ({ navigation }) => {
 
     const [trending, setTrending] = 
         React.useState(dummyData.trendingCurrencies)
+
+    const [transactionHistory, setTransactionHistory] = 
+        React.useState(dummyData.transactionHistory)
+
+    // transactionhistory component를 prices랑 home에서 동시 사용
+    // prices는 가로(FlatList), home에서는 세로(row)로 사용하는데
+    // component는 가로(FlatList)로 정의하였으니
+    // home에서 세로(row)로 표시하면서 오류 로그 메시지가 출력
+    // 이걸 출력되지 않게 설정
+    React.useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+    }, []
+    )
     
     function renderHeader() {
 
@@ -35,6 +49,9 @@ const Home = ({ navigation }) => {
                     borderRadius: 10,
                     backgroundColor: COLORS.white
                 }}
+                onPress={() => navigation.navigate("CryptoDetail",
+                    { currency: item }
+                )}
             >
                 {/* Currency */}
             <View
@@ -271,6 +288,16 @@ const Home = ({ navigation }) => {
         )
     }
 
+
+    function renderTransactionHistory() {
+        return (
+            <TransactionHistory 
+                customContainerStyle={{ ...styles.shadow }}
+                history={transactionHistory}
+            />
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{ flex:1, paddingBottom: 130 }}>
@@ -278,6 +305,7 @@ const Home = ({ navigation }) => {
                 {renderHeader()}
                 {renderAlert()}
                 {renderNotice()}
+                {renderTransactionHistory()}
                 </View> 
         </ScrollView>
     )

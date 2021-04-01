@@ -1,10 +1,16 @@
 import React from 'react';
 import {
     StyleSheet,
+    SafeAreaView,
     View,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    Image,
+    ScrollView,
+    Animated
 } from 'react-native';
+import { dummyData, COLORS, SIZES, FONTS, icons } from "../constants";
+
 
 const CryptoDetail = ({ navigation }) => {
     return (
