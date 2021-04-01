@@ -221,12 +221,63 @@ const Home = ({ navigation }) => {
         )
     }
 
+    function renderNotice() {
+        return (
+            <View
+                style={{
+                    marginTop: SIZES.padding,
+                    marginHorizontal: SIZES.padding,
+                    padding: 20,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.secondary,
+                    ...styles.shadow
+                }}
+            >
+                <Text
+                    style={{
+                        color: COLORS.white, ...FONTS.h3
+                    }}
+                >
+                Investing Safety
+                </Text>
+                <Text
+                    style={{
+                        marginTop: SIZES.base,
+                        color: COLORS.white, 
+                        ...FONTS.body4,
+                        lineHeight: 18
+                    }}
+                >
+                It`s very difficult to time an investment, especially when the market is volatile. Learn how to use dollar cost averaging to you advantage.
+                </Text>
+                
+                <TouchableOpacity
+                    style={{ marginTip: SIZES.base }}
+                
+                    onPress={() => console.log("Learn More")}
+                >
+                    <Text
+                    style={{
+                        textDecorationColor: 'underline',
+                        color: COLORS.green, 
+                        ...FONTS.h3
+                    }}
+                    >
+                Learn More
+                </Text>
+
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{ flex:1, paddingBottom: 130 }}>
     {/* 밑에 130올린이유 : tab.js에서 transaction부분인 custombottom에서 위로 30만큼 더 올렸으니 scrollview와 겹치지 않게  */}
                 {renderHeader()}
                 {renderAlert()}
+                {renderNotice()}
                 </View> 
         </ScrollView>
     )
