@@ -13,6 +13,10 @@ import {
 
 import { dummyData, COLORS, SIZES, FONTS, icons, images} from "../constants"
 
+import { PriceAlert } from "../components";
+
+
+
 const Home = ({ navigation }) => {
 
     const [trending, setTrending] = 
@@ -210,11 +214,19 @@ const Home = ({ navigation }) => {
             </View>
         )
     }
+
+    function renderAlert() {
+        return (
+            <PriceAlert />
+        )
+    }
+
     return (
         <ScrollView>
             <View style={{ flex:1, paddingBottom: 130 }}>
     {/* 밑에 130올린이유 : tab.js에서 transaction부분인 custombottom에서 위로 30만큼 더 올렸으니 scrollview와 겹치지 않게  */}
                 {renderHeader()}
+                {renderAlert()}
                 </View> 
         </ScrollView>
     )
