@@ -10,7 +10,7 @@ import {
     Animated
 } from 'react-native';
 import { dummyData, COLORS, SIZES, FONTS, icons } from "../constants";
-import { HeaderBar, CurrencyLabel, TextButton } from "../components"
+import { HeaderBar, CurrencyLabel, TextButton, PriceAlert } from "../components"
 import { VictoryScatter, VictoryLine, VictoryChart, VictoryAxis } from 'victory-native';
 import { VictoryCustomTheme } from "../styles";
 
@@ -260,6 +260,106 @@ const CryptoDetail = ({ route, navigation }) => {
         )
         
     }
+
+    function renderBuy() {
+        return (
+            <View
+                style={{
+                    marginTop: SIZES.padding,
+                    marginHorizontal: SIZES.radius,
+                    padding: SIZES.radius,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.white,
+                    ...styles.shadow 
+                }}
+            >
+                {/* 코인 구매하는 전체 section */}
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        marginBottom: SIZES.radius
+                    }}
+                >
+                    {/* Currency section */}
+                    <View style={{ flex: 1 }}>
+                        <CurrencyLabel
+                            icon={selectedCurrency?.image}
+                            currency={ `${selectedCurrency?.currency} Wallet` }
+                            code={selectedCurrency?.code}
+                        />
+                    </View>
+                    
+                    {/* Amount section */}
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <View style={{ marginRight: SIZES.base }}>
+                            <Text style={{...FONTS.h3}}>
+                            ${selectedCurrency?.wallet.value}
+                            </Text>
+                            <Text
+                                style={{
+                                    textAlign: 'right',
+                                    color: COLORS.gray,
+                                    ...FONTS.body4
+                                }}
+                            >
+                            {selectedCurrency?.wallet.crypto}
+                            {selectedCurrency?.code}
+                            </Text>
+                        </View>
+                        <Image
+                                source={icons.right_arrow}
+                                resizeMode="cover"
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    tintColor: COLORS.gray
+                                }}
+                            />
+
+                    </View>
+                    
+
+                </View>
+
+                <TextButton
+                    label="Buy"
+                    onPress={() => navigation.navigate
+                    ("Transaction", { currency: selectedCurrency })}
+                />
+
+            </View>
+        )
+    }
+
+    function renderAbout() {
+        return (
+            <View
+                style={{
+                    marginTop: SIZES.padding,
+                    marginHorizontal: SIZES.radius,
+                    padding: SIZES.radius,
+                    borderRadius: SIZES.radius,
+                    backgroundColor: COLORS.white,
+                    ...styles.shadow
+                }}
+            >
+                <Text style={{...FONTS.h3}}>
+                About {selectedCurrency?.currency}
+                </Text>
+                <Text style={{marginTop: SIZES.base, ...FONTS.body3}}>
+                {selectedCurrency?.description}
+                </Text>
+
+            </View>
+        )
+    }
+
     return (
         <SafeAreaView
             style={{
@@ -278,6 +378,14 @@ const CryptoDetail = ({ route, navigation }) => {
                     }}
                 >
                 {renderChart()}
+                {renderBuy()}
+                {renderAbout()}
+                <PriceAlert
+                    customContainerStyle={{
+                        marginTop: SIZES.padding,
+                        marginHorizontal: SIZES.radius
+                    }}
+                />
                 </View>
             </ScrollView>
 
