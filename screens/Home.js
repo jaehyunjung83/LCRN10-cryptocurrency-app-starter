@@ -36,6 +36,8 @@ const Home = ({ navigation }) => {
     }, []
     )
     
+
+
     function renderHeader() {
 
         const renderItem = ({ item, index }) => (
@@ -111,7 +113,7 @@ const Home = ({ navigation }) => {
                 
                 <Text
                     style={{
-                        color: item.type == "I" ? COLORS.green : COLORS.red,
+                        color: item.type == "I" ? COLORS.red : COLORS.green,
                         ...FONTS.h3
                     }}
                 >
@@ -275,7 +277,7 @@ const Home = ({ navigation }) => {
                 >
                     <Text
                     style={{
-                        textDecorationColor: 'underline',
+                        color: 'underline',
                         color: COLORS.green, 
                         ...FONTS.h3
                     }}

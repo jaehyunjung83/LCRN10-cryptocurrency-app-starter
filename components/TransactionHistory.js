@@ -49,7 +49,7 @@ const TransactionHistory = ({ customContainerStyle, history }) => {
             >
                 <Text
                     style={{
-                        color: item.type == "B" ? COLORS.green : COLORS.black,
+                        color: item.type == "B" ? COLORS.red : COLORS.green,
                         ...FONTS.h3
                     }}
                 >
